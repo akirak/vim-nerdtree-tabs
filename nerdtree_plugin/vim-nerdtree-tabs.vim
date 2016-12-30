@@ -618,7 +618,9 @@ endfun
 fun! s:BufReadHandler()
   " Refresh NERDTree to show currently opened file
   if g:nerdtree_tabs_autofind
-    call s:NERDTreeFindFile()
+    if s:IsNERDTreeOpenInCurrentTab()
+      silent NERDTreeFind
+    endif
     call s:NERDTreeUnfocus()
   endif
 endfun
