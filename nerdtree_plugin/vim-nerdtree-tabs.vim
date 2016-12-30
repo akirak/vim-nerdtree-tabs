@@ -412,9 +412,12 @@ endfun
 " s:NERDTreeFindFile() {{{
 "
 fun! s:NERDTreeFindFile()
-  if s:IsNERDTreeOpenInCurrentTab()
-    silent NERDTreeFind
+  if !s:IsNERDTreeOpenInCurrentTab()
+    let l:bufname = bufname('%')
+    NERDTreeTabsOpen
+    exe bufwinnr(l:bufname) . "wincmd w"
   endif
+  silent NERDTreeFind
 endfun
 
 " }}}
